@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Официальный курс валют";
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Центральный банк Российской Федерации установил с @DateTime.Now.ToString("dd.MM.yyyy") г. следующие курсы иностранных валют к рублю Российской Федерации без обязательств Банка России покупать или продавать указанные валюты по данному курсу</h4>
+        <table class="table table-bordered table-hover">
+            <tbody>
+                <tr>
+                    <th>
+                        Валюта
+                    </th>
+                    <th>
+                        Букв.код
+                    </th>
+                    <th>
+                        Номинал
+                    </th>
+                    <th>
+                        Курс
+                    </th>
+                </tr>
+                @foreach (ValuteCurse.Models.Currency b in ViewBag.Currency)
+                {
+                    <tr>
+                        <td><p>@b.CurrencyName</p></td>
+                        <td><p>@b.CurrencyStringCode</p></td>
+                        <td><p>@b.Nominal</p></td>
+                        <td><p>@b.ExchangeRate</p></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

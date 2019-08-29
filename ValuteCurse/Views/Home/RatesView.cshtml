@@ -1,0 +1,33 @@
+﻿@model ValuteCurse.Models.DynamicCurrency
+
+<div class="col-md-6" id="rates_view">
+    <h4>Динамика курса валюты </h4>
+    <table id="curseTable" class="table table-bordered table-hover">
+        <tbody>
+            <tr>
+                <th>
+                    Дата
+                </th>
+                <th>
+                    Номинал
+                </th>
+                <th>
+                    Курс
+                </th>
+            </tr>
+            @foreach (ValuteCurse.Models.DynamicCurrency b in ViewBag.DynamicCurrency)
+            {
+                <tr>
+                    <td><p>@b.RatesDate.ToString("dd.MM.yyyy")</p></td>
+                    <td><p>@b.Nominal</p></td>
+                    <td><p>@b.ExchangeRate</p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="col-md-6" id="rates_view_chart">
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+</div>
+

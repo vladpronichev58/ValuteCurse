@@ -1,0 +1,58 @@
+﻿
+@model ValuteCurse.Models.CurrencyFromDate
+@{
+    ViewBag.Title = "Динамика котировок";
+}
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+<h2>Динамика котрировок</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Ajax.BeginForm("Rates", new AjaxOptions{ UpdateTargetId = "results" }))
+        {
+            <div id="valute" class="form-group input-group-sm">
+                @Html.LabelFor(m => m.CurrencyCode, "Выберите валюту")
+                @Html.DropDownListFor(m => m.CurrencyCode, new SelectList(ViewBag.CurrencyFromDate, "CurrencyCode", "CurrencyName"), new { @class = "form-control" } )
+            </div>
+            <div class="form-group input-group-sm">
+                @Html.LabelFor(m => m.StartDate, "Выберите период, с")
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control datepicker", placeholder = "..." })
+                @Html.ValidationMessageFor(m => m.StartDate)
+            </div>
+            <div class="form-group input-group-sm">
+                @Html.LabelFor(m => m.EndDate, "до")
+                @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control datepicker", placeholder = "..." })
+                @Html.ValidationMessageFor(m => m.EndDate)
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" class="btn btn-default" value="Получить данные" />
+                </div>
+            </div>
+        }
+        
+    </div>
+</div>
+<br/>
+<div class="row" id="results">
+
+</div>
+
+
+@section scripts{
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".datepicker").datepicker({
+                dateFormat: "dd.mm.yy",
+                changeMonth: true,
+            });
+        });
+    </script>
+    }
